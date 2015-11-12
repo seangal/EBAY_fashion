@@ -141,8 +141,8 @@ public class MainActivity extends AppCompatActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
+                PlaceholderFragment fragment = new PlaceholderFragment();
+                Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
@@ -154,9 +154,26 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_deminsions, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            TextView textView;
+            View rootView = null;
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+
+                case 1:
+                    rootView = inflater.inflate(R.layout.fragment_deminsions, container, false);
+                    textView = (TextView) rootView.findViewById(R.id.section_label);
+                    textView.setText("Dimensions!");
+                    break;
+                case 2:
+                    rootView = inflater.inflate(R.layout.fragment_sugested, container, false);
+                    textView = (TextView) rootView.findViewById(R.id.section_label);
+                    textView.setText("Suggested Items!");
+                    break;
+                case 3:
+                    rootView = inflater.inflate(R.layout.fragment_search, container, false);
+                    textView = (TextView) rootView.findViewById(R.id.section_label);
+                    textView.setText("Search!");
+                    break;
+            }
             return rootView;
         }
     }
