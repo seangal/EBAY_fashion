@@ -160,15 +160,15 @@ public class MainActivity extends AppCompatActivity {
 
                 case 1:
                     rootView = inflater.inflate(R.layout.fragment_deminsions, container, false);
-                    Measures.onCreate();
+                    Measures.onCreate(rootView);
                     break;
                 case 2:
                     rootView = inflater.inflate(R.layout.fragment_sugested, container, false);
-                    Sugested.onCreate();
+                    Sugested.onCreate(rootView);
                     break;
                 case 3:
                     rootView = inflater.inflate(R.layout.fragment_search, container, false);
-                    Search.onCreate();
+                    Search.onCreate(rootView);
                     break;
             }
             return rootView;

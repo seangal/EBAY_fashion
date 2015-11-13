@@ -1,10 +1,12 @@
 package com.edy.katzir.ebayfashion;
 
+import android.view.View;
+
 /**
  * Created by sean1 on 13/11/2015.
  */
 public class Search {
-    static void onCreate(){
+    static void onCreate(View view){
         
     }
 }
