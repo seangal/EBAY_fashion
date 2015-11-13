@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
+
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -154,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            TextView textView;
             View rootView = null;
             switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
 
@@ -173,5 +175,11 @@ public class MainActivity extends AppCompatActivity {
             }
             return rootView;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        Measures.Save();
+        super.onPause();
     }
 }

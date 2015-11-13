@@ -3,12 +3,14 @@ package com.edy.katzir.ebayfashion;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by sean1 on 13/11/2015.
@@ -19,6 +21,7 @@ public class Measures{
     static TextView hips;
     static SharedPreferences.Editor editor;
     static Activity activity;
+    static SQLiteDatabase data;
     static void onCreate(View view){
         activity =(Activity)view.getContext();
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
@@ -26,50 +29,25 @@ public class Measures{
         bust=(TextView)view.findViewById(R.id.bust);
         waste=(TextView)view.findViewById(R.id.waste);
         hips=(TextView)view.findViewById(R.id.hips);
-        bust.addTextChangedListener(new TextWatcher() {
+        data = activity.openOrCreateDatabase("data", activity.MODE_PRIVATE, null);
+        data.execSQL("CREATE TABLE IF NOT EXISTS PerData(BustSize VARCHAR,WasteSize VARCHAR, HipsSize VARCHAR, Gender VARCHAR);");
+        try {
+            Cursor result = data.rawQuery("SELECT * FROM PerData", null);
+            result.moveToFirst();
 
-            public void afterTextChanged(Editable s) {
-            }
+            String bust2 = result.getString(0);
+            String waste2 = result.getString(1);
+            String hips2 = result.getString(2);
 
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
+            bust.setText(bust2);
+            waste.setText(waste2);
+            hips.setText(hips2);
 
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                editor.putString(activity.getString(R.string.bust), s.toString());
-                editor.commit();
-            }
-        });
-        waste.addTextChangedListener(new TextWatcher() {
+            //String gender2 = result.getString(4);
+        }catch (Exception e){}
+    }
 
-            public void afterTextChanged(Editable s) {
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                editor.putString(activity.getString(R.string.waste), s.toString());
-                editor.commit();
-            }
-        });
-        hips.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-            }
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                editor.putString(activity.getString(R.string.hips), s.toString());
-                editor.commit();
-            }
-        });
+    static void Save(){
+        data.execSQL("UPDATE PerData SET BustSize='"+bust.getText()+"', WasteSize='"+waste.getText()+"', HipsSize='"+hips.getText()+"', Gender='Female'");
     }
 }
