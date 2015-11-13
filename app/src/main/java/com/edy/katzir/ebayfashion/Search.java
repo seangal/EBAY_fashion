@@ -10,6 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sean1 on 13/11/2015.
  */
@@ -44,8 +47,11 @@ public class Search {
     void onCreate(View view){
         activity =(Activity)view.getContext();
 
-        CustomList adapter = new CustomList((Activity) view.getContext(), web, imageId);
-        SwipeListRow slr = new SwipeListRow(view.getContext(),adapter,"test_image","https://www.google.co.il/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png");
+
+        List<SwipeListRow> items = new ArrayList<SwipeListRow>();
+
+        SwipeListAdapter adapter = new SwipeListAdapter(view.getContext(), R.layout.list_single, items);
+        items.add(new SwipeListRow(view.getContext(),adapter,"test","http://static.adzerk.net/Advertisers/4b6eb86012864ec487b1ee4967d3c410.jpg"));
         list = (ListView) view.findViewById(R.id.list);
         list.setAdapter(adapter);
     }

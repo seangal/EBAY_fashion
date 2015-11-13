@@ -17,9 +17,9 @@ public class SwipeListRow {
     String image;
 
     Bitmap imageBitmap = null;
-    CustomList adapter;
+    SwipeListAdapter adapter;
 
-    public SwipeListRow(Context context, CustomList adapter, String name,String image) {
+    public SwipeListRow(Context context, SwipeListAdapter adapter, String name,String image) {
         super();
         this.context = context;
         this.adapter = adapter;
@@ -41,6 +41,23 @@ public class SwipeListRow {
     public void setName(String name) {
         this.name = name;
     }
+    /**
+     * Image
+     **/
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+
+
     public void loadImage() {
         ImageLoadTask imageLoadTask = new ImageLoadTask();
 
