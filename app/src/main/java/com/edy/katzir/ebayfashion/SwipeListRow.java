@@ -14,21 +14,17 @@ public class SwipeListRow {
     Context context;
 
     String name;
-    String company;
-    String cat;
     String image;
 
     Bitmap imageBitmap = null;
     CustomList adapter;
 
-    public SwipeListRow(Context context, CustomList adapter, String name, String company, String cat, String image) {
+    public SwipeListRow(Context context, CustomList adapter, String name,String image) {
         super();
         this.context = context;
         this.adapter = adapter;
 
         this.name = name;
-        this.company = company;
-        this.cat = cat;
         this.image = image;
 
         this.imageBitmap = null;
@@ -45,44 +41,6 @@ public class SwipeListRow {
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * Company
-     **/
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
-    /**
-     * Category
-     **/
-    public String getCat() {
-        return cat;
-    }
-
-    public void setCat(String cat) {
-        this.cat = cat;
-    }
-
-    /**
-     * Image
-     **/
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Bitmap getImageBitmap() {
-        return imageBitmap;
-    }
-
     public void loadImage() {
         ImageLoadTask imageLoadTask = new ImageLoadTask();
 
@@ -102,16 +60,35 @@ public class SwipeListRow {
 
             String urlStr = param[0];
             try {
-                URL url = new URL(urlStr);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                img = BitmapFactory.decodeStream(input);
-            } catch (IOException e) {
-            }
-            return img;
+                fis = new FileInputStream(file);
+                img = BitmapFactory.decodeStream(fis);
+            } catch (FileNotFoundException ex){
+                try {
+                    URL url = new URL(urlStr);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setDoInput(true);
+                    connection.connect();
+                    InputStream input = connection.getInputStream();
+                    img = BitmapFactory.decodeStream(input);
+                    try {
+                        FileOutputStream out = new FileOutputStream(file);
+                        img.compress(Bitmap.CompressFormat.JPEG, 80, out);
+                        out.flush();
+                        out.close();
+
+                    }
+                    catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (IOException e) {
+                }
+
         }
+            return img;
+    }
 
         protected void onPostExecute(Bitmap ret) {
             if (ret != null) {
