@@ -8,11 +8,12 @@ package com.edy.katzir.ebayfashion;
 
         import org.apache.http.HttpEntity;
         import org.apache.http.HttpResponse;
-        import org.apache.http.client.ClientProtocolException;
-        import org.apache.http.client.HttpClient;
-        import org.apache.http.client.methods.HttpGet;
-        import org.apache.http.entity.BufferedHttpEntity;
-        import org.apache.http.impl.client.DefaultHttpClient;
+        import org.apache.http.ClientProtocolException;
+        import org.apache.http.HttpClient;
+        import org.apache.http.HttpGet;
+        import org.apache.http.BufferedHttpEntity;
+        import org.apache.http.DefaultHttpClient;
+
 
         import java.io.*;
 
