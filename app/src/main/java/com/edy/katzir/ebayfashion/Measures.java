@@ -17,13 +17,16 @@ import android.widget.Toast;
  * Created by sean1 on 13/11/2015.
  */
 public class Measures{
+
     static TextView bust;
     static TextView waste;
     static TextView hips;
     static SharedPreferences.Editor editor;
     static Activity activity;
     static SQLiteDatabase data;
+
     static void onCreate(View view){
+
         activity =(Activity)view.getContext();
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
@@ -41,15 +44,14 @@ public class Measures{
         String bust2 = result.getString(0);
         String waste2 = result.getString(1);
         String hips2 = result.getString(2);
+        //String gender2 = result.getString(4);
 
         bust.setText(bust2);
         waste.setText(waste2);
         hips.setText(hips2);
-
-        //String gender2 = result.getString(4);
     }
 
-    static void Save(){
-        data.execSQL("UPDATE PerData SET BustSize='"+bust.getText()+"', WasteSize='"+waste.getText()+"', HipsSize='"+hips.getText()+"', Gender='Female'");
+    static void Save() {
+        data.execSQL("UPDATE PerData SET BustSize='" + bust.getText() + "', WasteSize='" + waste.getText() + "', HipsSize='"+hips.getText()+"', Gender='Female'");
     }
 }
