@@ -4,18 +4,11 @@ package com.edy.katzir.ebayfashion;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.os.AsyncTask;
-        import android.util.Log;
-
-        import org.apache.http.HttpEntity;
-        import org.apache.http.HttpResponse;
-        import org.apache.http.ClientProtocolException;
-        import org.apache.http.HttpClient;
-        import org.apache.http.HttpGet;
-        import org.apache.http.BufferedHttpEntity;
-        import org.apache.http.DefaultHttpClient;
 
 
         import java.io.*;
+        import java.net.HttpURLConnection;
+        import java.net.URL;
 
 public class SwipeListRow {
     Context context;
@@ -107,50 +100,16 @@ public class SwipeListRow {
 
             Bitmap img = null;
 
+            String urlStr = param[0];
             try {
-                fis = new FileInputStream(file);
-                img = BitmapFactory.decodeStream(fis);
+                URL url = new URL(urlStr);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
+                InputStream input = connection.getInputStream();
+                img = BitmapFactory.decodeStream(input);
+            } catch (IOException e) {
             }
-            catch (FileNotFoundException ex) {
-                Log.v("SwipeListRow", "Image not found: " + ex);
-
-                String urlStr = param[0];
-
-                HttpClient client = new DefaultHttpClient();
-                try {
-                    HttpGet request = new HttpGet(urlStr);
-                    HttpResponse response;
-                    try {
-                        response = client.execute(request);
-                        HttpEntity entity = response.getEntity();
-                        BufferedHttpEntity bufferedEntity = new BufferedHttpEntity(entity);
-                        InputStream inputStream = bufferedEntity.getContent();
-                        img = BitmapFactory.decodeStream(inputStream);
-
-                        // Caching the Image
-                        try {
-                            FileOutputStream out = new FileOutputStream(file);
-                            img.compress(Bitmap.CompressFormat.JPEG, 80, out);
-                            out.flush();
-                            out.close();
-
-                        }
-                        catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                        catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                catch(Exception e) {
-                    Log.v("SwipeListRow", "Image URL is not vaild: " + e);
-                }
-            }
-
             return img;
         }
 
