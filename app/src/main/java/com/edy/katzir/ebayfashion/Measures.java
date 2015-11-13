@@ -34,20 +34,19 @@ public class Measures{
         data = activity.openOrCreateDatabase("dataBaseFashion", activity.MODE_PRIVATE, null);
         data.execSQL("CREATE TABLE IF NOT EXISTS PerData(BustSize VARCHAR,WasteSize VARCHAR, HipsSize VARCHAR, Gender VARCHAR);");
         data.execSQL("INSERT INTO PerData VALUES('', '', '', 'Female')");
-        try {
-            Cursor result = data.rawQuery("SELECT * FROM PerData", null);
-            result.moveToFirst();
 
-            String bust2 = result.getString(0);
-            String waste2 = result.getString(1);
-            String hips2 = result.getString(2);
+        Cursor result = data.rawQuery("SELECT * FROM PerData", null);
+        result.moveToFirst();
 
-            bust.setText(bust2);
-            waste.setText(waste2);
-            hips.setText(hips2);
+        String bust2 = result.getString(0);
+        String waste2 = result.getString(1);
+        String hips2 = result.getString(2);
 
-            //String gender2 = result.getString(4);
-        }catch (Exception e){}
+        bust.setText(bust2);
+        waste.setText(waste2);
+        hips.setText(hips2);
+
+        //String gender2 = result.getString(4);
     }
 
     static void Save(){
