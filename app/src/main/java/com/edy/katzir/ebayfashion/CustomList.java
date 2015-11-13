@@ -1,4 +1,4 @@
-package com.example.user.testapp;
+package com.edy.katzir.ebayfashion;
 
 /**
  * Created by USER on 13/11/2015.

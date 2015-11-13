@@ -170,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 3:
                     rootView = inflater.inflate(R.layout.fragment_search, container, false);
-                    Search.onCreate(rootView);
+                    Search search=new Search();
+                    search.onCreate(rootView);
                     break;
             }
             return rootView;
