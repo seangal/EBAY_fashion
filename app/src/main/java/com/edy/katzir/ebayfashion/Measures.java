@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +27,13 @@ public class Measures{
         activity =(Activity)view.getContext();
         SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-        bust=(TextView)view.findViewById(R.id.bust);
-        waste=(TextView)view.findViewById(R.id.waste);
-        hips=(TextView)view.findViewById(R.id.hips);
-        data = activity.openOrCreateDatabase("data", activity.MODE_PRIVATE, null);
+        bust=(EditText)view.findViewById(R.id.bust);
+        waste=(EditText)view.findViewById(R.id.waste);
+        hips=(EditText)view.findViewById(R.id.hips);
+
+        data = activity.openOrCreateDatabase("dataBaseFashion", activity.MODE_PRIVATE, null);
         data.execSQL("CREATE TABLE IF NOT EXISTS PerData(BustSize VARCHAR,WasteSize VARCHAR, HipsSize VARCHAR, Gender VARCHAR);");
+        data.execSQL("INSERT INTO PerData VALUES('', '', '', 'Female')");
         try {
             Cursor result = data.rawQuery("SELECT * FROM PerData", null);
             result.moveToFirst();
