@@ -10,7 +10,7 @@ import android.widget.Spinner;
 public class Measures{
     static void onCreate(View view){
         Spinner dropdown = (Spinner)view.findViewById(R.id.gender);
-        String[] items = new String[]{"1", "2", "three"};
+        String[] items = new String[]{"Male", "Female"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(view.getContext(), android.R.layout.simple_spinner_dropdown_item, items);
         dropdown.setAdapter(adapter);
     }

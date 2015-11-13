@@ -10,20 +10,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Gender"
+        android:text="@string/Gender"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/gender"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="0dp" />
 
     <Spinner
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:id="@+id/gender"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/textView"
         android:layout_toEndOf="@+id/textView"
         android:layout_marginLeft="21dp"
-        android:layout_marginStart="21dp" />
+        android:layout_marginStart="21dp"
+        android:spinnerMode="dropdown"
+        android:touchscreenBlocksFocus="false"
+        android:clickable="false" />
 
 </RelativeLayout>
