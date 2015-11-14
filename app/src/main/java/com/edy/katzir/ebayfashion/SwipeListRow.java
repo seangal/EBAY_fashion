@@ -4,6 +4,7 @@ package com.edy.katzir.ebayfashion;
         import android.graphics.Bitmap;
         import android.graphics.BitmapFactory;
         import android.os.AsyncTask;
+        import android.util.Log;
 
 
         import java.io.*;
@@ -66,7 +67,7 @@ public class SwipeListRow {
         }
     }
 
-    private class ImageLoadTask extends AsyncTask<String, String, Bitmap> {
+    private class ImageLoadTask extends AsyncTask<String, Void, Bitmap> {
 
         protected Bitmap doInBackground(String... param) {
             File cacheDir = context.getApplicationContext().getCacheDir();
@@ -76,6 +77,7 @@ public class SwipeListRow {
             Bitmap img = null;
 
             String urlStr = param[0];
+            Log.d("DEBUG",urlStr);
             try {
                 fis = new FileInputStream(file);
                 img = BitmapFactory.decodeStream(fis);
