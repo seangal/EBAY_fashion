@@ -6,4 +6,6 @@
     <string name="bust"></string>
     <string name="waste"></string>
     <string name="hips"></string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

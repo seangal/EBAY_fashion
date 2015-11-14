@@ -20,30 +20,26 @@ import java.util.List;
 
 public class Search {
 
-    ListView list;
-    Activity activity;
-    String jsonString;
-    View view;
-    List<SwipeListRow> items;
-    SwipeListAdapter adapter;
+    static ListView list;
+    static Activity activity;
+    static String jsonString;
+    static View view;
+    static List<SwipeListRow> items;
+    static SwipeListAdapter adapter;
 
-    void onCreate(View view1) {
+    static void onCreate(View view1) {
         view = view1;
 
         String url = "http://ebay.edy.co.il/search3.php?id=11554&PerPage=10&pageNumber=1";
 
         getJSON(url);
     }
-
-    public void getJSON(String url) {
+    static public void getJSON(String url) {
         JSONParse gets = new JSONParse();
         gets.execute(url);
     }
 
-    Search a(){
-        return Search.this;
-    }
-    private class JSONParse extends AsyncTask<String, String, JSONObject> {
+    static private class JSONParse extends AsyncTask<String, String, JSONObject> {
 
         @Override
         protected JSONObject doInBackground(String... args) {
